@@ -1,8 +1,8 @@
-from random import randint
+from random import randint, choice
 
 import prompt
 
-TASK_TEXT = 'Answer "yes" if the number is even, otherwise answer "no".'
+TASK_TEXT = "What is the result of the expression?"
 ANSWER_TEXT = 'Your answer: '
 ATTEMPTS_COUNT = 3
 START = 1
@@ -16,16 +16,19 @@ def welcome_player():
 
 
 def is_correct(player_answer, player_task):
-    correct_answer = 'yes' if is_even(player_task) else 'no'
+    correct_answer = ''
+    (a, operation, b) = player_task
+    if operation == '+':
+        correct_answer = str(a + b)
+    elif operation == '*':
+        correct_answer = str(a * b)
+    elif operation == '-':
+        correct_answer = str(a - b)
     return correct_answer == player_answer, correct_answer
 
 
-def is_even(number):
-    return number % 2 == 0
-
-
 def task():
-    return randint(START, END)
+    return randint(START, END), choice(['+', '-', '*']), randint(START, END)
 
 
 def game():
@@ -33,13 +36,13 @@ def game():
     current_attempt = 1
     print(TASK_TEXT)
     while current_attempt <= ATTEMPTS_COUNT:
-        player_task = task()
-        print(f"Question: {player_task}")
+        (a, operation, b) = task()
+        print(f"Question: {a} {operation} {b}")
         player_answer = prompt.string(ANSWER_TEXT)
-        (correct, correct_answer) = is_correct(player_answer, player_task)
+        (correct, correct_answer) = is_correct(player_answer, (a, operation, b))
         if not correct:
-            print(f"{player_answer} is wrong answer ;(. Correct answer "
-                  f"was {correct_answer}.")
+            print(f"{player_answer} is wrong answer ;(. Correct answer was "
+                  f"{correct_answer}.")
             print(f"Let's try again, {player_name}!")
             return
         print('Correct!')
