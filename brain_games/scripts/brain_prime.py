@@ -2,7 +2,7 @@ from random import randint
 
 import prompt
 
-TASK_TEXT = "What number is missing in the progression?"
+TASK_TEXT = 'Answer "yes" if given number is prime. Otherwise answer "no".'
 ANSWER_TEXT = 'Your answer: '
 ATTEMPTS_COUNT = 3
 START = 1
@@ -16,30 +16,21 @@ def welcome_player():
 
 
 def is_correct(player_answer, player_task):
-    return player_answer == str(player_task), player_task
+    correct_answer = 'yes' if is_prime(player_task) else 'no'
+    return correct_answer == player_answer, correct_answer
 
 
 def task():
-    min_steps_num = 5
-    max_steps_num = 10
-    first_num = randint(START, END)
-    step_num = randint(START, END)
-    steps_count = randint(min_steps_num, max_steps_num)
-    line = ''
-    i = 0
-    i_secret = randint(0, steps_count)
-    secret_num = 0
-    while i <= steps_count:
-        if i_secret == i:
-            first_num += step_num
-            line += ".."
-            secret_num = first_num
-        else:
-            first_num += step_num
-            line += f"{first_num}"
-        line += ' '
-        i += 1
-    return line.strip(), secret_num
+    return randint(START + 1, END)
+
+
+def is_prime(num):
+    counter = 2
+    while num % counter != 0:
+        counter += 1
+        if counter == num:
+            return True
+    return False
 
 
 def game():
@@ -47,10 +38,10 @@ def game():
     current_attempt = 1
     print(TASK_TEXT)
     while current_attempt <= ATTEMPTS_COUNT:
-        (line, answer) = task()
-        print(f"Question: {line} ")
+        player_task = task()
+        print(f"Question: {player_task} ")
         player_answer = prompt.string(ANSWER_TEXT)
-        (correct, correct_answer) = is_correct(player_answer, answer)
+        (correct, correct_answer) = is_correct(player_answer, player_task)
         if not correct:
             print(f"{player_answer} is wrong answer ;(. Correct answer was "
                   f"{correct_answer}.")
