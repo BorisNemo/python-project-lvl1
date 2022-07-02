@@ -12,6 +12,7 @@ def welcome_player():
 
 
 def game(data):
+    print('Welcome to the Brain Games!')
     player_name = welcome_player()
     task_text = data.TASK_TEXT
     current_attempt = 1
