@@ -6,9 +6,11 @@
 Проект в рамках Hexlet.io.
 
 ## Видео установки и тест игр:
-brain-even
-
+brain-even:
 [![asciicast](https://asciinema.org/a/505443.svg)](https://asciinema.org/a/505443)
 
-brain-calc
+brain-calc:
 [![asciicast](https://asciinema.org/a/505450.svg)](https://asciinema.org/a/505450)
+
+brain-gcd:
+[![asciicast](https://asciinema.org/a/505539.svg)](https://asciinema.org/a/505539)
