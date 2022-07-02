@@ -6,11 +6,13 @@ END = 100
 
 
 def is_correct(player_task):
+    answer = ''
     (first_num, second_num) = player_task
     temp = first_num if first_num > second_num else second_num
     for i in range(1, temp + 1):
         if (first_num % i == 0) and (second_num % i == 0):
-            return str(i)
+            answer = str(i)
+    return answer
 
 
 def task_data():
