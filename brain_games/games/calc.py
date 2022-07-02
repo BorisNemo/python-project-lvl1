@@ -30,7 +30,10 @@ def task():
 
 
 def task_data():
-    question_data = randint(START, END), choice(['+', '-', '*']), randint(START, END)
+    question_data = \
+        randint(START, END),\
+        choice(['+', '-', '*']),\
+        randint(START, END)
     (a, operation, b) = question_data
     question = f"{a} {operation} {b}"
     correct_answer = is_correct(question_data)
